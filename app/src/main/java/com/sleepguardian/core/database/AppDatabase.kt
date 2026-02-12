@@ -11,7 +11,7 @@ import com.sleepguardian.data.local.entities.AlarmEntity
         AlarmEntity::class,
     ],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
