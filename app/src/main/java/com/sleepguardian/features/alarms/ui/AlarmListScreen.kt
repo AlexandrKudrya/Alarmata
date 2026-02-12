@@ -22,10 +22,11 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.DismissDirection
+import androidx.compose.material3.DismissValue
+import androidx.compose.material3.SwipeToDismiss
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberSwipeToDismissBoxState
+import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -125,18 +126,19 @@ fun AlarmListScreen(
                             items = state.alarms,
                             key = { it.id }
                         ) { alarm ->
-                            val dismissState = rememberSwipeToDismissBoxState(
-                                confirmValueChange = { value ->
-                                    if (value == SwipeToDismissBoxValue.EndToStart) {
+                            val dismissState = rememberDismissState(
+                                confirmStateChange = { value ->
+                                    if (value == DismissValue.DismissedToStart) {
                                         alarmToDelete = alarm
                                     }
                                     false
                                 }
                             )
 
-                            SwipeToDismissBox(
+                            SwipeToDismiss(
                                 state = dismissState,
-                                backgroundContent = {
+                                directions = setOf(DismissDirection.EndToStart),
+                                background = {
                                     val color by animateColorAsState(
                                         targetValue = MaterialTheme.colorScheme.errorContainer,
                                         label = "swipe_bg"
@@ -155,16 +157,16 @@ fun AlarmListScreen(
                                         )
                                     }
                                 },
-                                enableDismissFromStartToEnd = false
-                            ) {
-                                AlarmCard(
-                                    alarm = alarm,
-                                    onToggle = { enabled ->
-                                        viewModel.toggleAlarm(alarm.id, enabled)
-                                    },
-                                    onClick = { onEditAlarm(alarm.id) }
-                                )
-                            }
+                                dismissContent = {
+                                    AlarmCard(
+                                        alarm = alarm,
+                                        onToggle = { enabled ->
+                                            viewModel.toggleAlarm(alarm.id, enabled)
+                                        },
+                                        onClick = { onEditAlarm(alarm.id) }
+                                    )
+                                }
+                            )
                         }
                         item { Spacer(modifier = Modifier.height(80.dp)) }
                     }
