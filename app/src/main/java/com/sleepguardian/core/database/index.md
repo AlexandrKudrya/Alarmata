@@ -1,10 +1,12 @@
-# core.database
+# database
 
-Room database setup and configuration.
+Room database setup.
 
 ## Files
-- `AppDatabase.kt` — Room database class defining all entities and DAOs.
-- `Converters.kt` — TypeConverters for custom data types (Date, List, etc.) in Room entities.
+
+- `AppDatabase.kt` — Room database class. Currently contains AlarmEntity only (v1). New entities added per iteration.
+- `Converters.kt` — Room TypeConverters for serializing complex types (days of week, etc.).
 
 ## Subfolders
-- `migrations/` — Database migration definitions for schema changes across versions.
+
+- `migrations/` — Room database migration classes (empty until schema changes in Iteration 2.3+).

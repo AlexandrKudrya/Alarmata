@@ -1,7 +1,8 @@
-# features.settings
+# settings
 
-App settings and preferences.
+App settings feature.
 
 ## Subfolders
-- `ui/` — SettingsScreen composable with preference items.
-- `viewmodel/` — SettingsViewModel managing settings state and persistence.
+
+- `ui/` — SettingsScreen placeholder. Will be implemented in later iterations.
+- `viewmodel/` — ViewModels (to be added later).

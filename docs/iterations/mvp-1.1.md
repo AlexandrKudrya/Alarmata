@@ -2,7 +2,7 @@
 
 **Итерация:** 1 (MVP)
 **Срок:** 3-5 дней
-**Статус:** Не начата
+**Статус:** Завершена
 
 ## Цель
 
@@ -10,16 +10,16 @@
 
 ## Задачи
 
-- [ ] Создать Android-проект с Kotlin + Jetpack Compose
-- [ ] Настроить Hilt для Dependency Injection
-- [ ] Настроить Room Database (базовая схема)
-- [ ] Создать основные экраны с навигацией:
+- [x] Создать Android-проект с Kotlin + Jetpack Compose
+- [x] Настроить Hilt для Dependency Injection
+- [x] Настроить Room Database (базовая схема)
+- [x] Создать основные экраны с навигацией:
   - Main screen со списком будильников (пока пустой)
   - Add/Edit Alarm screen (заглушка)
   - Settings screen (заглушка)
-- [ ] Базовый UI kit: Material 3 компоненты, кнопки, карточки
-- [ ] Bottom Navigation (Alarms, Statistics, Settings)
-- [ ] Настроить тему (цвета, типографика)
+- [x] Базовый UI kit: Material 3 компоненты, кнопки, карточки
+- [x] Bottom Navigation (Alarms, Statistics, Settings)
+- [x] Настроить тему (цвета, типографика)
 
 ## Технические детали
 

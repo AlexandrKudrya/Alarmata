@@ -1,8 +1,9 @@
-# presentation.theme
+# theme
 
-Material 3 theme definition.
+Material 3 theme configuration.
 
 ## Files
-- `Theme.kt` — Main theme composable applying Material 3 design with dynamic colors.
-- `Color.kt` — Color palette definitions for light and dark themes.
-- `Typography.kt` — Typography scale using Material 3 type system.
+
+- `Theme.kt` — SleepGuardianTheme composable. Supports light/dark and dynamic colors (Android 12+).
+- `Color.kt` — Color palette: deep indigo primary, soft lavender secondary, warm amber tertiary. Full light and dark variants.
+- `Typography.kt` — Custom typography scale based on Material 3 defaults.

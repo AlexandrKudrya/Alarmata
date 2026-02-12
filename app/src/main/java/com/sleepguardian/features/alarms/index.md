@@ -1,7 +1,8 @@
-# features.alarms
+# alarms
 
-Alarm list and CRUD screens.
+Alarm list and CRUD feature.
 
 ## Subfolders
-- `ui/` — Composable screens and components (AlarmListScreen, AddEditAlarmScreen, components/).
-- `viewmodel/` — ViewModels for alarm screens (AlarmListViewModel, AddEditAlarmViewModel).
+
+- `ui/` — Composable screens: AlarmListScreen, AddEditAlarmScreen. Contains components/ subfolder for reusable composables.
+- `viewmodel/` — ViewModels (to be added in MVP 1.2).

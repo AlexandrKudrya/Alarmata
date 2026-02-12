@@ -1,6 +1,8 @@
-# presentation.navigation
+# navigation
 
 Compose Navigation setup.
 
 ## Files
-- `NavGraph.kt` — Navigation graph defining all app routes and screen destinations for Compose Navigation.
+
+- `NavGraph.kt` — Navigation host with routes: alarms (start), add_alarm, statistics, settings.
+- `TopLevelRoute.kt` — Data class for bottom navigation items (route, name resource, icon).
