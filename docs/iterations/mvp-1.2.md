@@ -2,7 +2,7 @@
 
 **Итерация:** 1 (MVP)
 **Срок:** 5-7 дней
-**Статус:** Не начата
+**Статус:** Завершена
 
 ## Цель
 
@@ -10,27 +10,32 @@
 
 ## Задачи
 
-- [ ] Room Entity для будильника (`AlarmEntity`)
-- [ ] `AlarmDao` с CRUD-операциями
-- [ ] Domain model `Alarm` + маппер Entity <-> Domain
-- [ ] `AlarmRepository` (interface) + `AlarmRepositoryImpl`
-- [ ] Use cases: `CreateAlarmUseCase`, `UpdateAlarmUseCase`, `DeleteAlarmUseCase`, `GetAlarmsUseCase`
-- [ ] `AlarmListViewModel` — загрузка, toggle, удаление
-- [ ] `AddEditAlarmViewModel` — создание и редактирование
-- [ ] UI: AlarmListScreen
+- [x] Room Entity для будильника (`AlarmEntity`)
+- [x] `AlarmDao` с CRUD-операциями
+- [x] Domain model `Alarm` + маппер Entity <-> Domain (`AlarmMapper`)
+- [x] `AlarmRepository` (interface) + `AlarmRepositoryImpl`
+- [x] Use cases: `CreateAlarmUseCase`, `UpdateAlarmUseCase`, `DeleteAlarmUseCase`, `GetAlarmsUseCase`, `GetAlarmByIdUseCase`, `ToggleAlarmUseCase`
+- [x] `AlarmListViewModel` — загрузка, toggle, удаление (sealed `AlarmListUiState`)
+- [x] `AddEditAlarmViewModel` — создание и редактирование (с `SavedStateHandle`, `SharedFlow` событиями)
+- [x] UI: AlarmListScreen
   - Список будильников (LazyColumn)
-  - Карточка будильника: время, дни недели, toggle
+  - Карточка будильника: время, дни недели, toggle (`AlarmCard`)
   - FAB для добавления
-  - Свайп или долгое нажатие для удаления
-- [ ] UI: AddEditAlarmScreen
-  - TimePicker (системный)
-  - Выбор дней недели (чипы)
-  - Выбор мелодии (из системных рингтонов)
+  - SwipeToDismissBox для удаления
+  - Empty state, loading state, error state
+- [x] UI: AddEditAlarmScreen
+  - TimePicker (24h системный)
+  - Выбор дней недели (FilterChips — `DayOfWeekSelector`)
   - Label (опционально)
+  - Выбор типа задания (FilterChips: Math, QR Code, Shake, Memory, Typing, AI Question)
+  - Выбор сложности (FilterChips: Easy, Medium, Hard)
   - Toggle вибрации
-  - Кнопка "Сохранить"
-- [ ] Удаление с диалогом подтверждения
-- [ ] Сортировка по времени
+  - Toggle Snooze
+  - Кнопка сохранения (Check icon в TopAppBar)
+- [x] Удаление с диалогом подтверждения (`DeleteAlarmDialog`)
+- [x] Навигация edit_alarm/{alarmId} для редактирования
+- [x] Hilt DI: `RepositoryModule` для привязки `AlarmRepositoryImpl` к `AlarmRepository`
+- [x] CI/CD: GitHub Actions (android-build.yml, quick-apk.yml)
 
 ## Database Schema
 
@@ -70,5 +75,5 @@ data class AlarmEntity(
 
 ## Риски
 
-- Сериализация `Set<DayOfWeek>` в Room — решать через TypeConverter
-- Доступ к системным рингтонам — `RingtoneManager`
+- Сериализация `Set<DayOfWeek>` в Room — решено через TypeConverter + AlarmMapper
+- Доступ к системным рингтонам — `RingtoneManager` (будет реализовано в следующих итерациях)

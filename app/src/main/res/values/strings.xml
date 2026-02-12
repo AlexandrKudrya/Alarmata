@@ -7,6 +7,14 @@
     <string name="empty_alarms_title">No alarms yet</string>
     <string name="empty_alarms_subtitle">Tap + to create your first alarm</string>
     <string name="add_alarm">Add alarm</string>
+    <string name="edit_alarm">Edit alarm</string>
+    <string name="save">Save</string>
+    <string name="repeat_days">Repeat</string>
+    <string name="alarm_label">Label</string>
+    <string name="task_type">Wake-up task</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="vibration">Vibration</string>
+    <string name="snooze">Snooze</string>
     <string name="settings_title">Settings</string>
     <string name="statistics_title">Statistics</string>
     <string name="coming_soon">Coming soon</string>
