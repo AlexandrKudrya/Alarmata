@@ -127,7 +127,7 @@ fun AlarmListScreen(
                             key = { it.id }
                         ) { alarm ->
                             val dismissState = rememberDismissState(
-                                confirmStateChange = { value ->
+                                confirmValueChange = { value ->
                                     if (value == DismissValue.DismissedToStart) {
                                         alarmToDelete = alarm
                                     }
