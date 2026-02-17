@@ -30,3 +30,9 @@
 - `confirmStateChange` -> `confirmValueChange` for `rememberDismissState`
 - Removed `?attr/colorControlNormal` from `ic_alarm.xml` (AppCompat attr unavailable in Compose)
 - Added missing `FOREGROUND_SERVICE_MEDIA_PLAYBACK` permission for Android 14+
+- Alarm UI not appearing when alarm fires:
+  - `AlarmReceiver` now launches `ActiveAlarmActivity` directly (not only via full-screen intent)
+  - Added runtime permission requests in `MainActivity`:
+    - `POST_NOTIFICATIONS` (Android 13+)
+    - `SCHEDULE_EXACT_ALARM` (Android 12+)
+    - `USE_FULL_SCREEN_INTENT` (Android 14+)
