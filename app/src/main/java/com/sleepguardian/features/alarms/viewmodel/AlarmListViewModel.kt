@@ -3,8 +3,10 @@ package com.sleepguardian.features.alarms.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sleepguardian.domain.models.Alarm
+import com.sleepguardian.core.alarm.AlarmScheduler
 import com.sleepguardian.domain.usecases.alarm.DeleteAlarmUseCase
 import com.sleepguardian.domain.usecases.alarm.GetAlarmsUseCase
+import com.sleepguardian.domain.usecases.alarm.GetAlarmByIdUseCase
 import com.sleepguardian.domain.usecases.alarm.ToggleAlarmUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +20,9 @@ import javax.inject.Inject
 class AlarmListViewModel @Inject constructor(
     private val getAlarmsUseCase: GetAlarmsUseCase,
     private val toggleAlarmUseCase: ToggleAlarmUseCase,
-    private val deleteAlarmUseCase: DeleteAlarmUseCase
+    private val deleteAlarmUseCase: DeleteAlarmUseCase,
+    private val getAlarmByIdUseCase: GetAlarmByIdUseCase,
+    private val alarmScheduler: AlarmScheduler
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AlarmListUiState>(AlarmListUiState.Loading)
@@ -43,11 +47,18 @@ class AlarmListViewModel @Inject constructor(
     fun toggleAlarm(id: Long, isEnabled: Boolean) {
         viewModelScope.launch {
             toggleAlarmUseCase(id, isEnabled)
+            val alarm = getAlarmByIdUseCase(id) ?: return@launch
+            if (isEnabled) {
+                alarmScheduler.schedule(alarm)
+            } else {
+                alarmScheduler.cancel(id)
+            }
         }
     }
 
     fun deleteAlarm(alarm: Alarm) {
         viewModelScope.launch {
+            alarmScheduler.cancel(alarm.id)
             deleteAlarmUseCase(alarm)
         }
     }

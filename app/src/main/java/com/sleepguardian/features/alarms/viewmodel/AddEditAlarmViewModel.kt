@@ -7,6 +7,7 @@ import com.sleepguardian.domain.models.Alarm
 import com.sleepguardian.domain.models.DayOfWeek
 import com.sleepguardian.domain.models.Difficulty
 import com.sleepguardian.domain.models.TaskType
+import com.sleepguardian.core.alarm.AlarmScheduler
 import com.sleepguardian.domain.usecases.alarm.CreateAlarmUseCase
 import com.sleepguardian.domain.usecases.alarm.GetAlarmByIdUseCase
 import com.sleepguardian.domain.usecases.alarm.UpdateAlarmUseCase
@@ -26,7 +27,8 @@ class AddEditAlarmViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val createAlarmUseCase: CreateAlarmUseCase,
     private val updateAlarmUseCase: UpdateAlarmUseCase,
-    private val getAlarmByIdUseCase: GetAlarmByIdUseCase
+    private val getAlarmByIdUseCase: GetAlarmByIdUseCase,
+    private val alarmScheduler: AlarmScheduler
 ) : ViewModel() {
 
     private val alarmId: Long = savedStateHandle["alarmId"] ?: -1L
@@ -112,11 +114,14 @@ class AddEditAlarmViewModel @Inject constructor(
                 taskDifficulty = s.taskDifficulty,
                 snoozeEnabled = s.snoozeEnabled
             )
-            if (isEditMode) {
+            val savedAlarm = if (isEditMode) {
                 updateAlarmUseCase(alarm)
+                alarm
             } else {
-                createAlarmUseCase(alarm)
+                val newId = createAlarmUseCase(alarm)
+                alarm.copy(id = newId)
             }
+            alarmScheduler.schedule(savedAlarm)
             _events.emit(AddEditAlarmEvent.Saved)
         }
     }
