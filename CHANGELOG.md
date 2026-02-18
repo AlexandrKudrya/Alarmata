@@ -41,3 +41,10 @@
     - `POST_NOTIFICATIONS` (Android 13+)
     - `SCHEDULE_EXACT_ALARM` (Android 12+)
     - `USE_FULL_SCREEN_INTENT` (Android 14+)
+
+### Docs
+- Added iteration `MVP-1.6` — Quick Sleep Setup (quick alarm in 2 swipes + sleep cycle calculator)
+- Added iteration `IT-2.5` — UI/UX Polish & Design System (between iterations 2 and 3)
+- Updated iteration `IT-3.2` — added Smartwatch / Health Connect integration section
+- Updated `docs/iterations/index.md` with new iteration entries
+- Updated `docs/ROADMAP.md` with MVP 1.6 and IT-2.5 sections
