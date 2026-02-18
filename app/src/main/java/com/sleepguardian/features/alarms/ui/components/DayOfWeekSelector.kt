@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.sleepguardian.domain.models.DayOfWeek
+import com.sleepguardian.presentation.util.shortNameRes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +35,7 @@ fun DayOfWeekSelector(
                 onClick = { onDayToggle(day) },
                 label = {
                     Text(
-                        text = day.shortName.take(2),
+                        text = stringResource(day.shortNameRes),
                         fontSize = 12.sp
                     )
                 },

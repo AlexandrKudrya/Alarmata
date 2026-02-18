@@ -15,6 +15,11 @@
 - Alarm scheduling wired into ViewModels:
   - `AddEditAlarmViewModel` schedules alarm on save
   - `AlarmListViewModel` schedules/cancels on toggle, cancels on delete
+- Russian language support (`values-ru/strings.xml`)
+  - Language picker in Settings (System / English / Russian)
+  - `LocaleHelper` for storing and applying locale preference
+  - All hardcoded UI strings moved to string resources
+  - `EnumStringResources` for localized enum display names (days, tasks, difficulty)
 
 ### Fixed
 - Missing Gradle wrapper files (`gradlew`, `gradlew.bat`, `gradle-wrapper.jar`) for CI

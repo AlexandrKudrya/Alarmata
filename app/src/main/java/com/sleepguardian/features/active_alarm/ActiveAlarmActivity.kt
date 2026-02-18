@@ -25,10 +25,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.sleepguardian.R
 import com.sleepguardian.core.alarm.AlarmReceiver
 import com.sleepguardian.core.alarm.AlarmService
+import com.sleepguardian.core.locale.LocaleHelper
 import com.sleepguardian.presentation.theme.SleepGuardianTheme
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -37,6 +40,10 @@ import java.util.Locale
 class ActiveAlarmActivity : ComponentActivity() {
 
     private var alarmId: Long = -1L
+
+    override fun attachBaseContext(newBase: android.content.Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,7 +149,7 @@ private fun ActiveAlarmScreen(
                 modifier = Modifier.size(width = 200.dp, height = 56.dp)
             ) {
                 Text(
-                    text = "Dismiss",
+                    text = stringResource(R.string.alarm_dismiss),
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -154,7 +161,7 @@ private fun ActiveAlarmScreen(
                     modifier = Modifier.size(width = 200.dp, height = 56.dp)
                 ) {
                     Text(
-                        text = "Snooze (5 min)",
+                        text = stringResource(R.string.alarm_snooze_with_time),
                         style = MaterialTheme.typography.titleMedium
                     )
                 }

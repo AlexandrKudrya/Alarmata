@@ -35,11 +35,16 @@ import androidx.navigation.compose.rememberNavController
 import com.sleepguardian.R
 import com.sleepguardian.presentation.navigation.NavGraph
 import com.sleepguardian.presentation.navigation.TopLevelRoute
+import com.sleepguardian.core.locale.LocaleHelper
 import com.sleepguardian.presentation.theme.SleepGuardianTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()

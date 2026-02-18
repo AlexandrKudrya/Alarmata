@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sleepguardian.domain.models.Alarm
+import com.sleepguardian.presentation.util.formatDaysOfWeek
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +61,7 @@ fun AlarmCard(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = alarm.daysFormatted,
+                    text = formatDaysOfWeek(alarm.daysOfWeek),
                     style = MaterialTheme.typography.bodyMedium,
                     color = if (alarm.isEnabled)
                         MaterialTheme.colorScheme.onSurfaceVariant

@@ -40,6 +40,7 @@ import com.sleepguardian.domain.models.DayOfWeek
 import com.sleepguardian.domain.models.Difficulty
 import com.sleepguardian.domain.models.TaskType
 import com.sleepguardian.features.alarms.ui.components.DayOfWeekSelector
+import com.sleepguardian.presentation.util.displayNameRes
 import com.sleepguardian.features.alarms.viewmodel.AddEditAlarmEvent
 import com.sleepguardian.features.alarms.viewmodel.AddEditAlarmViewModel
 
@@ -209,7 +210,7 @@ private fun TaskTypeSelector(
             FilterChip(
                 selected = type == selected,
                 onClick = { onSelect(type) },
-                label = { Text(type.displayName) },
+                label = { Text(stringResource(type.displayNameRes)) },
                 modifier = Modifier.weight(1f)
             )
         }
@@ -224,7 +225,7 @@ private fun TaskTypeSelector(
                 FilterChip(
                     selected = type == selected,
                     onClick = { onSelect(type) },
-                    label = { Text(type.displayName) },
+                    label = { Text(stringResource(type.displayNameRes)) },
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -251,7 +252,7 @@ private fun DifficultySelector(
             FilterChip(
                 selected = difficulty == selected,
                 onClick = { onSelect(difficulty) },
-                label = { Text(difficulty.displayName) },
+                label = { Text(stringResource(difficulty.displayNameRes)) },
                 modifier = Modifier.weight(1f)
             )
         }
