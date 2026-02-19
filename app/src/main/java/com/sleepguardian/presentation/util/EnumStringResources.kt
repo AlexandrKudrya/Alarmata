@@ -52,8 +52,10 @@ fun formatDaysOfWeek(days: Set<DayOfWeek>): String {
         days.size == 7 -> stringResource(R.string.days_every_day)
         days == weekdays -> stringResource(R.string.days_weekdays)
         days == weekends -> stringResource(R.string.days_weekends)
-        else -> days
-            .sortedBy { it.ordinal }
-            .joinToString(", ") { stringResource(it.shortNameRes) }
+        else -> {
+            val sorted = days.sortedBy { it.ordinal }
+            val names = sorted.map { stringResource(it.shortNameRes) }
+            names.joinToString(", ")
+        }
     }
 }
