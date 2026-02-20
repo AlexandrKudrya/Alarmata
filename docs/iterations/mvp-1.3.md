@@ -2,7 +2,7 @@
 
 **Итерация:** 1 (MVP)
 **Срок:** 5-7 дней
-**Статус:** Не начата
+**Статус:** Завершена
 
 ## Цель
 
@@ -10,29 +10,29 @@
 
 ## Задачи
 
-- [ ] `AlarmScheduler` — обёртка над AlarmManager
+- [x] `AlarmScheduler` — обёртка над AlarmManager
   - `schedule(alarm)` — планирование
   - `cancel(alarmId)` — отмена
-  - `rescheduleAll()` — пересоздание всех после ребута
+  - `rescheduleAll()` — пересоздание всех после ребута (через `BootReceiver`)
   - Расчёт следующего срабатывания с учётом дней недели
-- [ ] `AlarmReceiver` (BroadcastReceiver)
+- [x] `AlarmReceiver` (BroadcastReceiver)
   - Получает Intent от AlarmManager
-  - Запускает WakeLockService
-- [ ] `BootReceiver` — восстановление будильников после перезагрузки
-- [ ] `WakeLockService` (Foreground Service)
-  - Acquire WakeLock (10 мин max)
+  - Запускает AlarmService + ActiveAlarmActivity напрямую
+- [x] `BootReceiver` — восстановление будильников после перезагрузки
+- [x] `AlarmService` (Foreground Service)
   - Запуск вибрации (VibrationEffect pattern)
   - Воспроизведение рингтона через MediaPlayer
   - Нарастающая громкость (0% -> 100% за 10 сек)
   - Foreground notification
-- [ ] `ActiveAlarmActivity` — полноэкранная Activity
+  - Auto-stop через 5 минут
+- [x] `ActiveAlarmActivity` — полноэкранная Activity
   - Флаги: `showWhenLocked`, `turnScreenOn`
   - Блокировка back button
   - Отображение времени, label
   - Кнопка "Отключить" (временная, без задания)
   - Кнопка "Snooze" (5 минут)
-- [ ] Интеграция: при создании/изменении будильника вызывать AlarmScheduler
-- [ ] Обработка пермишенов: `SCHEDULE_EXACT_ALARM`, `POST_NOTIFICATIONS`
+- [x] Интеграция: при создании/изменении будильника вызывать AlarmScheduler
+- [x] Обработка пермишенов: `SCHEDULE_EXACT_ALARM`, `POST_NOTIFICATIONS`, `USE_FULL_SCREEN_INTENT`
 
 ## Критические разрешения
 

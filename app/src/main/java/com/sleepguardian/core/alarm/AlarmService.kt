@@ -77,35 +77,46 @@ class AlarmService : Service() {
             else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
                 ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-            mediaPlayer = MediaPlayer().apply {
-                setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ALARM)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .build()
-                )
-                setDataSource(this@AlarmService, uri)
-                isLooping = true
-                prepare()
-                start()
-            }
+            mediaPlayer = createPlayer(uri)
         } catch (e: Exception) {
-            // Fallback: try default notification sound
             try {
                 val fallbackUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-                mediaPlayer = MediaPlayer().apply {
-                    setAudioAttributes(
-                        AudioAttributes.Builder()
-                            .setUsage(AudioAttributes.USAGE_ALARM)
-                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                            .build()
-                    )
-                    setDataSource(this@AlarmService, fallbackUri)
-                    isLooping = true
-                    prepare()
-                    start()
-                }
+                mediaPlayer = createPlayer(fallbackUri)
             } catch (_: Exception) { }
+        }
+
+        mediaPlayer?.let { startGradualVolume(it) }
+    }
+
+    private fun createPlayer(uri: Uri): MediaPlayer {
+        return MediaPlayer().apply {
+            setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ALARM)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build()
+            )
+            setDataSource(this@AlarmService, uri)
+            isLooping = true
+            setVolume(0f, 0f)
+            prepare()
+            start()
+        }
+    }
+
+    private fun startGradualVolume(player: MediaPlayer) {
+        serviceScope.launch {
+            val steps = 20
+            val stepDuration = VOLUME_RAMP_DURATION_MS / steps
+            for (i in 1..steps) {
+                delay(stepDuration)
+                val volume = i.toFloat() / steps
+                try {
+                    player.setVolume(volume, volume)
+                } catch (_: IllegalStateException) {
+                    break
+                }
+            }
         }
     }
 
@@ -168,5 +179,6 @@ class AlarmService : Service() {
     companion object {
         const val ACTION_STOP = "com.sleepguardian.ACTION_STOP"
         const val ACTION_SNOOZE = "com.sleepguardian.ACTION_SNOOZE_SERVICE"
+        private const val VOLUME_RAMP_DURATION_MS = 10_000L // 10 seconds
     }
 }

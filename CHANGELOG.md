@@ -6,10 +6,10 @@
 - Core alarm scheduling and firing infrastructure
   - `AlarmScheduler` - schedules exact alarms via `AlarmManager.setAlarmClock()`
   - `AlarmReceiver` - BroadcastReceiver that triggers alarm service
-  - `AlarmService` - foreground service with MediaPlayer (ringtone) + Vibrator
+  - `AlarmService` - foreground service with MediaPlayer (ringtone) + Vibrator + gradual volume ramp
   - `NotificationHelper` - notification channel + full-screen alarm notification
   - `AlarmActionReceiver` - dismiss/snooze actions from notification buttons
-  - `ActiveAlarmActivity` - full-screen alarm UI over lock screen (dismiss + snooze)
+  - `ActiveAlarmActivity` - full-screen alarm UI over lock screen (dismiss + snooze + back button blocked)
   - `BootReceiver` - reschedules all enabled alarms after device reboot
   - `ic_alarm` vector drawable for notification icon
 - Alarm scheduling wired into ViewModels:
@@ -41,6 +41,11 @@
     - `POST_NOTIFICATIONS` (Android 13+)
     - `SCHEDULE_EXACT_ALARM` (Android 12+)
     - `USE_FULL_SCREEN_INTENT` (Android 14+)
+
+### Changed
+- `AlarmService`: gradual volume increase 0% → 100% over 10 seconds
+- `ActiveAlarmActivity`: back button blocked during active alarm
+- MVP-1.3 iteration marked as completed
 
 ### Docs
 - Added iteration `MVP-1.6` — Quick Sleep Setup (quick alarm in 2 swipes + sleep cycle calculator)
