@@ -54,6 +54,14 @@
     <string name="alarm_dismiss">Выключить</string>
     <string name="alarm_snooze_with_time">Отложить (5 мин)</string>
 
+    <!-- Task UI -->
+    <string name="task_progress">%1$d / %2$d решено</string>
+    <string name="task_mistakes">Ошибки: %1$d</string>
+    <string name="task_answer_hint">Ваш ответ</string>
+    <string name="task_check">Проверить</string>
+    <string name="task_completed">Всё решено!</string>
+    <string name="task_result_mistakes">Ошибок: %1$d</string>
+
     <!-- Notifications -->
     <string name="alarm_notification_title">Будильник</string>
     <string name="alarm_notification_text">Нажмите, чтобы открыть</string>

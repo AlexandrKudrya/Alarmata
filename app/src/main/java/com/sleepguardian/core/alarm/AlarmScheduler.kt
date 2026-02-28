@@ -56,6 +56,8 @@ class AlarmScheduler @Inject constructor(
             putExtra(AlarmReceiver.EXTRA_RINGTONE_URI, alarm.ringtoneUri)
             putExtra(AlarmReceiver.EXTRA_LABEL, alarm.label)
             putExtra(AlarmReceiver.EXTRA_SNOOZE_ENABLED, alarm.snoozeEnabled)
+            putExtra(AlarmReceiver.EXTRA_TASK_TYPE, alarm.taskType.name)
+            putExtra(AlarmReceiver.EXTRA_TASK_DIFFICULTY, alarm.taskDifficulty.name)
         }
         return PendingIntent.getBroadcast(
             context,

@@ -20,6 +20,14 @@
   - `LocaleHelper` for storing and applying locale preference
   - All hardcoded UI strings moved to string resources
   - `EnumStringResources` for localized enum display names (days, tasks, difficulty)
+- Task System — Math Challenge (MVP-1.4):
+  - Task Engine: `Task` interface, `TaskData`, `TaskProgress`, `TaskFactory`
+  - `MathTask`: 3 difficulty levels (Easy 3 problems, Medium 4, Hard 5)
+  - `ActiveAlarmScreen` rewritten with task UI: problem display, numeric input, progress bar, color feedback
+  - Dismiss blocked until all problems solved; snooze still available
+  - `taskType` + `taskDifficulty` passed through entire trigger chain (Scheduler → Receiver → Activity)
+  - `AlarmLogEntity` + `AlarmLogDao` for logging task results
+  - Database migration v1 → v2
 
 ### Fixed
 - Missing Gradle wrapper files (`gradlew`, `gradlew.bat`, `gradle-wrapper.jar`) for CI

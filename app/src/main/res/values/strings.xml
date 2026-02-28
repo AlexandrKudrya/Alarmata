@@ -54,6 +54,14 @@
     <string name="alarm_dismiss">Dismiss</string>
     <string name="alarm_snooze_with_time">Snooze (5 min)</string>
 
+    <!-- Task UI -->
+    <string name="task_progress">%1$d / %2$d solved</string>
+    <string name="task_mistakes">Mistakes: %1$d</string>
+    <string name="task_answer_hint">Your answer</string>
+    <string name="task_check">Check</string>
+    <string name="task_completed">All solved!</string>
+    <string name="task_result_mistakes">Mistakes: %1$d</string>
+
     <!-- Notifications -->
     <string name="alarm_notification_title">Alarm</string>
     <string name="alarm_notification_text">Tap to open</string>
