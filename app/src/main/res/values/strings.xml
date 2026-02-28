@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sleep Guardian</string>
+
+    <!-- Navigation -->
+    <string name="nav_alarms">Alarms</string>
+    <string name="nav_statistics">Statistics</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Alarm list -->
+    <string name="empty_alarms_title">No alarms yet</string>
+    <string name="empty_alarms_subtitle">Tap + to create your first alarm</string>
+    <string name="add_alarm">Add alarm</string>
+    <string name="edit_alarm">Edit alarm</string>
+    <string name="save">Save</string>
+
+    <!-- Alarm editor -->
+    <string name="repeat_days">Repeat</string>
+    <string name="alarm_label">Label</string>
+    <string name="task_type">Wake-up task</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="vibration">Vibration</string>
+    <string name="snooze">Snooze</string>
+
+    <!-- Days of week (short) -->
+    <string name="day_mon">Mo</string>
+    <string name="day_tue">Tu</string>
+    <string name="day_wed">We</string>
+    <string name="day_thu">Th</string>
+    <string name="day_fri">Fr</string>
+    <string name="day_sat">Sa</string>
+    <string name="day_sun">Su</string>
+
+    <!-- Days formatted -->
+    <string name="days_once">Once</string>
+    <string name="days_every_day">Every day</string>
+    <string name="days_weekdays">Weekdays</string>
+    <string name="days_weekends">Weekends</string>
+
+    <!-- Task types -->
+    <string name="task_math">Math</string>
+    <string name="task_qr_code">QR Code</string>
+    <string name="task_shake">Shake</string>
+    <string name="task_memory">Memory</string>
+    <string name="task_typing">Typing</string>
+    <string name="task_ai_question">AI Question</string>
+
+    <!-- Difficulty levels -->
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+
+    <!-- Active alarm screen -->
+    <string name="alarm_dismiss">Dismiss</string>
+    <string name="alarm_snooze_with_time">Snooze (5 min)</string>
+
+    <!-- Task UI -->
+    <string name="task_progress">%1$d / %2$d solved</string>
+    <string name="task_mistakes">Mistakes: %1$d</string>
+    <string name="task_answer_hint">Your answer</string>
+    <string name="task_check">Check</string>
+    <string name="task_completed">All solved!</string>
+    <string name="task_result_mistakes">Mistakes: %1$d</string>
+
+    <!-- Notifications -->
+    <string name="alarm_notification_title">Alarm</string>
+    <string name="alarm_notification_text">Tap to open</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="snooze_label">Snooze</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="language_system">System default</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+
+    <!-- Other -->
+    <string name="statistics_title">Statistics</string>
+    <string name="coming_soon">Coming soon</string>
+</resources>

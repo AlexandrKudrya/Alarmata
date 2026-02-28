@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sleep Guardian</string>
+
+    <!-- Navigation -->
+    <string name="nav_alarms">Будильники</string>
+    <string name="nav_statistics">Статистика</string>
+    <string name="nav_settings">Настройки</string>
+
+    <!-- Alarm list -->
+    <string name="empty_alarms_title">Нет будильников</string>
+    <string name="empty_alarms_subtitle">Нажмите +, чтобы создать первый</string>
+    <string name="add_alarm">Добавить будильник</string>
+    <string name="edit_alarm">Редактировать</string>
+    <string name="save">Сохранить</string>
+
+    <!-- Alarm editor -->
+    <string name="repeat_days">Повтор</string>
+    <string name="alarm_label">Название</string>
+    <string name="task_type">Задание для пробуждения</string>
+    <string name="difficulty">Сложность</string>
+    <string name="vibration">Вибрация</string>
+    <string name="snooze">Отложить</string>
+
+    <!-- Days of week (short) -->
+    <string name="day_mon">Пн</string>
+    <string name="day_tue">Вт</string>
+    <string name="day_wed">Ср</string>
+    <string name="day_thu">Чт</string>
+    <string name="day_fri">Пт</string>
+    <string name="day_sat">Сб</string>
+    <string name="day_sun">Вс</string>
+
+    <!-- Days formatted -->
+    <string name="days_once">Один раз</string>
+    <string name="days_every_day">Каждый день</string>
+    <string name="days_weekdays">Будни</string>
+    <string name="days_weekends">Выходные</string>
+
+    <!-- Task types -->
+    <string name="task_math">Математика</string>
+    <string name="task_qr_code">QR-код</string>
+    <string name="task_shake">Встряхнуть</string>
+    <string name="task_memory">Память</string>
+    <string name="task_typing">Набор текста</string>
+    <string name="task_ai_question">ИИ-вопрос</string>
+
+    <!-- Difficulty levels -->
+    <string name="difficulty_easy">Легко</string>
+    <string name="difficulty_medium">Средне</string>
+    <string name="difficulty_hard">Сложно</string>
+
+    <!-- Active alarm screen -->
+    <string name="alarm_dismiss">Выключить</string>
+    <string name="alarm_snooze_with_time">Отложить (5 мин)</string>
+
+    <!-- Task UI -->
+    <string name="task_progress">%1$d / %2$d решено</string>
+    <string name="task_mistakes">Ошибки: %1$d</string>
+    <string name="task_answer_hint">Ваш ответ</string>
+    <string name="task_check">Проверить</string>
+    <string name="task_completed">Всё решено!</string>
+    <string name="task_result_mistakes">Ошибок: %1$d</string>
+
+    <!-- Notifications -->
+    <string name="alarm_notification_title">Будильник</string>
+    <string name="alarm_notification_text">Нажмите, чтобы открыть</string>
+    <string name="dismiss">Выключить</string>
+    <string name="snooze_label">Отложить</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_language">Язык</string>
+    <string name="language_system">Системный</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+
+    <!-- Other -->
+    <string name="statistics_title">Статистика</string>
+    <string name="coming_soon">Скоро</string>
+</resources>
