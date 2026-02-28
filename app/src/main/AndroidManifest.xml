@@ -35,7 +35,10 @@
         <activity
             android:name=".features.active_alarm.ActiveAlarmActivity"
             android:exported="false"
-            android:showOnLockScreen="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:showWhenLocked="true"
             android:turnScreenOn="true"
             android:theme="@style/Theme.SleepGuardian" />
 
