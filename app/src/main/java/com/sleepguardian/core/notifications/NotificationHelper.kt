@@ -44,25 +44,20 @@ class NotificationHelper @Inject constructor(
     fun buildAlarmNotification(
         alarmId: Long,
         label: String?,
-        snoozeEnabled: Boolean
+        snoozeEnabled: Boolean,
+        taskType: String = "MATH",
+        taskDifficulty: String = "MEDIUM"
     ): NotificationCompat.Builder {
         val fullScreenIntent = Intent(context, ActiveAlarmActivity::class.java).apply {
             putExtra(AlarmReceiver.EXTRA_ALARM_ID, alarmId)
             putExtra(AlarmReceiver.EXTRA_LABEL, label)
             putExtra(AlarmReceiver.EXTRA_SNOOZE_ENABLED, snoozeEnabled)
+            putExtra(AlarmReceiver.EXTRA_TASK_TYPE, taskType)
+            putExtra(AlarmReceiver.EXTRA_TASK_DIFFICULTY, taskDifficulty)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         val fullScreenPi = PendingIntent.getActivity(
             context, alarmId.toInt(), fullScreenIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val dismissIntent = Intent(context, AlarmActionReceiver::class.java).apply {
-            action = ACTION_DISMISS
-            putExtra(AlarmReceiver.EXTRA_ALARM_ID, alarmId)
-        }
-        val dismissPi = PendingIntent.getBroadcast(
-            context, (alarmId.toInt() * 10) + 1, dismissIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
@@ -75,8 +70,8 @@ class NotificationHelper @Inject constructor(
             .setFullScreenIntent(fullScreenPi, true)
             .setOngoing(true)
             .setAutoCancel(false)
-            .addAction(0, context.getString(R.string.dismiss), dismissPi)
 
+        // No Dismiss action — user must solve the task in ActiveAlarmActivity
         if (snoozeEnabled) {
             val snoozeIntent = Intent(context, AlarmActionReceiver::class.java).apply {
                 action = ACTION_SNOOZE

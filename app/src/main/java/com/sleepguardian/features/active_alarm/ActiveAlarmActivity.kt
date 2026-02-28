@@ -112,6 +112,9 @@ class ActiveAlarmActivity : ComponentActivity() {
         val difficulty = try { Difficulty.valueOf(taskDifficultyName) } catch (_: Exception) { Difficulty.MEDIUM }
         val task = TaskFactory.create(taskType, difficulty)
 
+        // Mute alarm sound/vibration — user sees the task, no need for noise
+        muteAlarm()
+
         setContent {
             SleepGuardianTheme {
                 ActiveAlarmScreen(
@@ -123,6 +126,14 @@ class ActiveAlarmActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    private fun muteAlarm() {
+        val intent = Intent(this, AlarmService::class.java).apply {
+            action = AlarmService.ACTION_MUTE
+            putExtra(AlarmReceiver.EXTRA_ALARM_ID, alarmId)
+        }
+        startService(intent)
     }
 
     private fun dismissAlarm() {

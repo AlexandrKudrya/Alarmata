@@ -5,8 +5,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import com.sleepguardian.domain.models.Alarm
 import com.sleepguardian.domain.models.DayOfWeek
+import com.sleepguardian.domain.models.Difficulty
+import com.sleepguardian.domain.models.TaskType
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Calendar
 import javax.inject.Inject
@@ -65,6 +68,35 @@ class AlarmScheduler @Inject constructor(
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+    }
+
+    fun scheduleTestAlarm(delaySeconds: Int = 10) {
+        val triggerTime = System.currentTimeMillis() + (delaySeconds * 1000L)
+        val testAlarmId = 99999L
+
+        val intent = Intent(context, AlarmReceiver::class.java).apply {
+            putExtra(AlarmReceiver.EXTRA_ALARM_ID, testAlarmId)
+            putExtra(AlarmReceiver.EXTRA_VIBRATE, true)
+            putExtra(AlarmReceiver.EXTRA_SNOOZE_ENABLED, true)
+            putExtra(AlarmReceiver.EXTRA_LABEL, "Test Alarm")
+            putExtra(AlarmReceiver.EXTRA_TASK_TYPE, TaskType.MATH.name)
+            putExtra(AlarmReceiver.EXTRA_TASK_DIFFICULTY, Difficulty.EASY.name)
+        }
+        val pi = PendingIntent.getBroadcast(
+            context,
+            testAlarmId.toInt(),
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pi)
+        } else {
+            alarmManager.setAlarmClock(
+                AlarmManager.AlarmClockInfo(triggerTime, pi), pi
+            )
+        }
+        Log.d("AlarmScheduler", "Test alarm scheduled in ${delaySeconds}s")
     }
 
     companion object {

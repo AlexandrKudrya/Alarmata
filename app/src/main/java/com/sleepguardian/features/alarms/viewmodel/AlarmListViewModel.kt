@@ -62,6 +62,10 @@ class AlarmListViewModel @Inject constructor(
             deleteAlarmUseCase(alarm)
         }
     }
+
+    fun fireTestAlarm() {
+        alarmScheduler.scheduleTestAlarm(delaySeconds = 10)
+    }
 }
 
 sealed interface AlarmListUiState {

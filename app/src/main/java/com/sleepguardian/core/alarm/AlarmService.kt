@@ -49,14 +49,22 @@ class AlarmService : Service() {
                 snoozeAlarm(alarmId)
                 return START_NOT_STICKY
             }
+            ACTION_MUTE -> {
+                muteAlarm()
+                return START_NOT_STICKY
+            }
         }
 
         val shouldVibrate = intent?.getBooleanExtra(AlarmReceiver.EXTRA_VIBRATE, true) ?: true
         val ringtoneUri = intent?.getStringExtra(AlarmReceiver.EXTRA_RINGTONE_URI)
         val label = intent?.getStringExtra(AlarmReceiver.EXTRA_LABEL)
         val snoozeEnabled = intent?.getBooleanExtra(AlarmReceiver.EXTRA_SNOOZE_ENABLED, true) ?: true
+        val taskType = intent?.getStringExtra(AlarmReceiver.EXTRA_TASK_TYPE) ?: "MATH"
+        val taskDifficulty = intent?.getStringExtra(AlarmReceiver.EXTRA_TASK_DIFFICULTY) ?: "MEDIUM"
 
-        val notification = notificationHelper.buildAlarmNotification(alarmId, label, snoozeEnabled)
+        val notification = notificationHelper.buildAlarmNotification(
+            alarmId, label, snoozeEnabled, taskType, taskDifficulty
+        )
         startForeground(alarmId.toInt(), notification.build())
 
         startRingtone(ringtoneUri)
@@ -138,6 +146,14 @@ class AlarmService : Service() {
         }
     }
 
+    private fun muteAlarm() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+        vibrator?.cancel()
+        vibrator = null
+    }
+
     private fun stopAlarm(alarmId: Long) {
         mediaPlayer?.stop()
         mediaPlayer?.release()
@@ -179,6 +195,7 @@ class AlarmService : Service() {
     companion object {
         const val ACTION_STOP = "com.sleepguardian.ACTION_STOP"
         const val ACTION_SNOOZE = "com.sleepguardian.ACTION_SNOOZE_SERVICE"
+        const val ACTION_MUTE = "com.sleepguardian.ACTION_MUTE"
         private const val VOLUME_RAMP_DURATION_MS = 10_000L // 10 seconds
     }
 }
