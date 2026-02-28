@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.sleepguardian.features.active_alarm.ActiveAlarmActivity
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -19,33 +18,24 @@ class AlarmReceiver : BroadcastReceiver() {
         val taskType = intent.getStringExtra(EXTRA_TASK_TYPE) ?: "MATH"
         val taskDifficulty = intent.getStringExtra(EXTRA_TASK_DIFFICULTY) ?: "MEDIUM"
 
-        // Start the foreground service for sound/vibration
+        // Start the foreground service — it will show a notification with fullScreenIntent
+        // which the system will use to automatically launch ActiveAlarmActivity.
+        // Do NOT call startActivity() here — on Android 10+ background activity starts
+        // are blocked. The fullScreenIntent in the notification is the correct mechanism.
         val serviceIntent = Intent(context, AlarmService::class.java).apply {
             putExtra(EXTRA_ALARM_ID, alarmId)
             putExtra(EXTRA_VIBRATE, vibrate)
             putExtra(EXTRA_RINGTONE_URI, ringtoneUri)
             putExtra(EXTRA_LABEL, label)
             putExtra(EXTRA_SNOOZE_ENABLED, snoozeEnabled)
+            putExtra(EXTRA_TASK_TYPE, taskType)
+            putExtra(EXTRA_TASK_DIFFICULTY, taskDifficulty)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(serviceIntent)
         } else {
             context.startService(serviceIntent)
         }
-
-        // Launch the full-screen alarm activity directly.
-        // setAlarmClock() grants a temporary background activity start exemption.
-        val activityIntent = Intent(context, ActiveAlarmActivity::class.java).apply {
-            putExtra(EXTRA_ALARM_ID, alarmId)
-            putExtra(EXTRA_LABEL, label)
-            putExtra(EXTRA_SNOOZE_ENABLED, snoozeEnabled)
-            putExtra(EXTRA_TASK_TYPE, taskType)
-            putExtra(EXTRA_TASK_DIFFICULTY, taskDifficulty)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                Intent.FLAG_ACTIVITY_NO_USER_ACTION
-        }
-        context.startActivity(activityIntent)
     }
 
     companion object {
